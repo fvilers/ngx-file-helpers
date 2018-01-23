@@ -1,0 +1,20 @@
+{
+  "name": "ngx-file-helpers",
+  "version": "0.0.0",
+  "description": "Angular File Helpers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvilers/ngx-file-helpers.git"
+  },
+  "keywords": [
+    "angular",
+    "file",
+    "helpers"
+  ],
+  "author": "Fabian Vilers <fabian.vilers@dev-one.com> (https://www.dev-one.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fvilers/ngx-file-helpers/issues"
+  },
+  "homepage": "https://github.com/fvilers/ngx-file-helpers#readme"
+}
