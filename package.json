@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "description": "Angular File Helpers",
   "scripts": {
+    "clean": "shx rm -rf dist/ && shx rm -rf build/",
     "build:esm2015": "ngc -p tsconfig-esm2015.json",
     "build:fesm2015": "rollup -c rollup-esm2015.conf.js",
     "build:esm5": "ngc -p tsconfig-esm5.json",
     "build:fesm5": "rollup -c rollup-esm5.conf.js",
     "build:umd": "rollup -c rollup-umd.conf.js",
     "build:umd:min": "uglifyjs dist/bundles/ngx-file-helpers.umd.js -c -m -o dist/bundles/ngx-file-helpers.umd.min.js",
-    "copy:assets": "shx cp -r build/esm2015/*.d.ts build/esm2015/src build/esm2015/*.json package.json README.md dist/ && shx rm dist/src/*.js"
+    "copy:assets": "shx cp -r build/esm2015/*.d.ts build/esm2015/src build/esm2015/*.json package.json README.md dist/ && shx rm dist/src/*.js",
+    "build": "npm run clean && npm run build:esm2015 && npm run build:fesm2015 && npm run build:esm5 && npm run build:fesm5 && npm run build:umd && npm run build:umd:min && npm run copy:assets"
   },
   "repository": {
     "type": "git",
