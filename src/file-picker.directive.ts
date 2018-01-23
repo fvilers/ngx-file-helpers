@@ -9,8 +9,8 @@ import {
   Renderer2
 } from '@angular/core';
 
-import { PickedFile } from './picked-file';
-import { PickedFileImpl } from './picked-file-impl';
+import { ReadFile } from './read-file';
+import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
 
 @Directive({
@@ -27,7 +27,7 @@ export class FilePickerDirective implements OnInit {
   @Input('ngFilePicker') readMode: ReadMode;
 
   @Output()
-  public filePick = new EventEmitter<PickedFile>();
+  public filePick = new EventEmitter<ReadFile>();
 
   @Output()
   public readStart = new EventEmitter<number>();
@@ -87,9 +87,9 @@ export class FilePickerDirective implements OnInit {
 
       reader.onload = (loaded: ProgressEvent) => {
         const fileReader = loaded.target as FileReader;
-        const pickedFile = new PickedFileImpl(file.lastModifiedDate, file.name, file.size, file.type, this.readMode, fileReader.result);
+        const readFile = new ReadFileImpl(file.lastModifiedDate, file.name, file.size, file.type, this.readMode, fileReader.result);
 
-        this.filePick.emit(pickedFile);
+        this.filePick.emit(readFile);
         resolve();
       };
 

@@ -1,7 +1,7 @@
-import { DroppedFile } from './dropped-file';
+import { ReadFile } from './read-file';
 import { ReadMode } from './read-mode.enum';
 
-export class DroppedFileImpl implements DroppedFile {
+export class ReadFileImpl implements ReadFile {
   get lastModifiedDate(): Date {
     return this._lastModifiedDate;
   }

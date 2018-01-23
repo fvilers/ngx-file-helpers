@@ -1,6 +1,6 @@
 import { ReadMode } from './read-mode.enum';
 
-export interface DroppedFile {
+export interface ReadFile {
   lastModifiedDate: Date;
   name: string;
   size: number;
