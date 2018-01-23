@@ -4,7 +4,8 @@
   "description": "Angular File Helpers",
   "scripts": {
     "build:esm2015": "ngc -p tsconfig-esm2015.json",
-    "build:fesm2015": "rollup -c rollup-esm2015.conf.js"
+    "build:fesm2015": "rollup -c rollup-esm2015.conf.js",
+    "build:esm5": "ngc -p tsconfig-esm5.json"
   },
   "repository": {
     "type": "git",
