@@ -3,6 +3,7 @@
     "node_modules": true,
     "npm-debug.log*": true,
     "package-lock.json": true,
-    "build": true
+    "build": true,
+    "dist": true
   }
 }

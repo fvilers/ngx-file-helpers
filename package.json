@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Angular File Helpers",
   "scripts": {
-    "build:esm2015": "ngc -p tsconfig-esm2015.json"
+    "build:esm2015": "ngc -p tsconfig-esm2015.json",
+    "build:fesm2015": "rollup -c rollup-esm2015.conf.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "@angular/compiler": "^5.2.1",
     "@angular/compiler-cli": "^5.2.1",
     "@angular/core": "^5.2.1",
+    "rollup": "0.55.0",
     "rxjs": "^5.5.6",
     "typescript": "^2.6.2",
     "zone.js": "^0.8.20"
