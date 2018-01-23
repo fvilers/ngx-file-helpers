@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "node_modules": true,
+    "npm-debug.log*": true,
+    "package-lock.json": true
+  }
+}
