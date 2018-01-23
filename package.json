@@ -8,7 +8,8 @@
     "build:esm5": "ngc -p tsconfig-esm5.json",
     "build:fesm5": "rollup -c rollup-esm5.conf.js",
     "build:umd": "rollup -c rollup-umd.conf.js",
-    "build:umd:min": "uglifyjs dist/bundles/ngx-file-helpers.umd.js -c -m -o dist/bundles/ngx-file-helpers.umd.min.js"
+    "build:umd:min": "uglifyjs dist/bundles/ngx-file-helpers.umd.js -c -m -o dist/bundles/ngx-file-helpers.umd.min.js",
+    "copy:assets": "shx cp -r build/esm2015/*.d.ts build/esm2015/src build/esm2015/*.json package.json README.md dist/ && shx rm dist/src/*.js"
   },
   "repository": {
     "type": "git",
@@ -39,5 +40,8 @@
     "typescript": "^2.6.2",
     "uglify-js": "3.3.8",
     "zone.js": "^0.8.20"
+  },
+  "devDependencies": {
+    "shx": "0.2.2"
   }
 }
