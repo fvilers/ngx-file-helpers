@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "es2015",
+    "target": "es2015",
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "outDir": "./build/esm2015",
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "es2015"
+    ]
+  },
+  "files": [
+    "./public_api.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "flatModuleOutFile": "ngx-file-helpers.js",
+    "flatModuleId": "ngx-file-helpers"
+  }
+}

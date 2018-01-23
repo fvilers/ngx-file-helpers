@@ -2,6 +2,9 @@
   "name": "ngx-file-helpers",
   "version": "0.0.0",
   "description": "Angular File Helpers",
+  "scripts": {
+    "build:esm2015": "ngc -p tsconfig-esm2015.json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fvilers/ngx-file-helpers.git"
