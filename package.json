@@ -15,7 +15,9 @@
     "build:umd": "rollup -c rollup-umd.conf.js",
     "build:umd:min": "uglifyjs dist/bundles/ngx-file-helpers.umd.js -c -m -o dist/bundles/ngx-file-helpers.umd.min.js",
     "copy:assets": "shx cp -r build/esm2015/*.d.ts build/esm2015/src build/esm2015/*.json package.json README.md dist/ && shx rm dist/src/*.js",
-    "build": "npm run clean && npm run build:esm2015 && npm run build:fesm2015 && npm run build:esm5 && npm run build:fesm5 && npm run build:umd && npm run build:umd:min && npm run copy:assets"
+    "build": "npm run clean && npm run build:esm2015 && npm run build:fesm2015 && npm run build:esm5 && npm run build:fesm5 && npm run build:umd && npm run build:umd:min && npm run copy:assets",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm publish dist"
   },
   "repository": {
     "type": "git",
