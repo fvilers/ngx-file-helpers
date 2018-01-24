@@ -2,6 +2,10 @@
   "name": "ngx-file-helpers",
   "version": "0.0.0",
   "description": "Angular File Helpers",
+  "main": "./bundles/ngx-file-helpers.umd.js",
+  "module": "./esm5/ngx-file-helpers.js",
+  "es2015": "./esm2015/ngx-file-helpers.js",
+  "typings": "./ngx-file-helpers.d.ts",
   "scripts": {
     "clean": "shx rm -rf dist/ && shx rm -rf build/",
     "build:esm2015": "ngc -p tsconfig-esm2015.json",
