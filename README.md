@@ -38,19 +38,10 @@ Add the file picker directive to an element, like a button.
 <button type="button" ngxFilePicker>Browse</button>
 ```
 
-Select how the file should be read; by default the mode is dataUrl. Available read modes are exposed through the ReadMode enum.
+Select how the file should be read; by default the mode is dataUrl.
 
 ```
 <button type="button" [ngxFilePicker]="readMode">Browse</button>
-```
-
-```
-enum ReadMode {
-  arrayBuffer,
-  binaryString,
-  dataURL,
-  text
-}
 ```
 
 Bind to the `filePick` event to get the picked file from the `$event` variable.
@@ -89,18 +80,6 @@ Use the optional `multiple` attribute to indicate whether the user can pick more
 </button>
 ```
 
-The picked file implements the following interface:
-
-```
-interface ReadFile {
-  lastModifiedDate: Date;
-  name: string;
-  size: number;
-  type: string;
-  dataURL: string;
-}
-```
-
 The directive also has a `reset()` method that unset the selected file. This is useful if you want to force the `filePick` event to trigger again even if the user has picked the same file.
 
 ```
@@ -122,3 +101,55 @@ There are two more events that can be listened to:
 - `readEnd`: triggered when the directive has read all the files.
 
 These two events emit the number of file (`$event` variable) to be or that has been read.
+
+## File Dropzone
+
+Add the file dropzone directive to an element, like a div.
+
+```
+<div ngxFileDropzone>Drop a file in this zone.</div>
+```
+
+Select how the file should be read; by default the mode is dataUrl.
+
+```
+<div [ngxFileDropzone]="readMode">Drop a file in this zone.</div>
+```
+
+Bind to the `fileDrop` event to get the dropped file from the `$event` variable.
+
+```
+<div
+  ngxFileDropzone
+  (fileDrop)="file = $event">
+  Drop a file in this zone.
+</div>
+```
+
+## ReadFile
+
+The read file implements the following interface:
+
+```
+interface ReadFile {
+  lastModifiedDate: Date;
+  name: string;
+  size: number;
+  type: string;
+  readMode: ReadMode;
+  content: any;
+}
+```
+
+## ReadMode
+
+Available read modes are exposed through the ReadMode enum:
+
+```
+enum ReadMode {
+  arrayBuffer,
+  binaryString,
+  dataURL,
+  text
+}
+```
