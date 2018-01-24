@@ -5,7 +5,7 @@ import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
 
 @Directive({
-  selector: '[ngFileDropzone]'
+  selector: '[ngxFileDropzone]'
 })
 export class FileDropzoneDirective {
   @Input('ngFileDropzone') readMode: ReadMode;

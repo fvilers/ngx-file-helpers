@@ -14,7 +14,7 @@ import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
 
 @Directive({
-  selector: '[ngFilePicker]'
+  selector: '[ngxFilePicker]'
 })
 export class FilePickerDirective implements OnInit {
   @Input()
