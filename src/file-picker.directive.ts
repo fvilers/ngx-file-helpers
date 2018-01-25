@@ -24,7 +24,7 @@ export class FilePickerDirective implements OnInit {
   get multiple() { return this._multiple; }
   set multiple(value: any) { this._multiple = coerceBooleanProperty(value); }
 
-  @Input('ngFilePicker') readMode: ReadMode;
+  @Input('ngxFilePicker') readMode: ReadMode;
 
   @Output()
   public filePick = new EventEmitter<ReadFile>();

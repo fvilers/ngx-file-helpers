@@ -8,7 +8,7 @@ import { ReadMode } from './read-mode.enum';
   selector: '[ngxFileDropzone]'
 })
 export class FileDropzoneDirective {
-  @Input('ngFileDropzone') readMode: ReadMode;
+  @Input('ngxFileDropzone') readMode: ReadMode;
 
   @Output()
   public fileDrop = new EventEmitter<ReadFile>();
