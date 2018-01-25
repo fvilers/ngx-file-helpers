@@ -8,6 +8,9 @@ Add the package to your application.
 npm install --save ngx-file-helpers
 ```
 
+## Demo
+https://stackblitz.com/edit/ngx-file-helpers-demo
+
 ## Getting started
 
 Import the file helpers module to your application module.
