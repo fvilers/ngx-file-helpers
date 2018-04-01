@@ -7,4 +7,5 @@ export interface ReadFile {
   type: string;
   readMode: ReadMode;
   content: any;
+  underlyingFile: File;
 }
