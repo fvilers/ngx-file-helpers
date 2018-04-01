@@ -3,19 +3,19 @@ import { ReadMode } from './read-mode.enum';
 
 export class ReadFileImpl implements ReadFile {
   get lastModifiedDate(): Date {
-    return this._lastModifiedDate;
+    return this._underlyingFile.lastModifiedDate;
   }
 
   get name(): string {
-    return this._name;
+    return this._underlyingFile.name;
   }
 
   get size(): number {
-    return this._size;
+    return this._underlyingFile.size;
   }
 
   get type(): string {
-    return this._type;
+    return this._underlyingFile.type;
   }
 
   get readMode(): ReadMode {
@@ -26,12 +26,13 @@ export class ReadFileImpl implements ReadFile {
     return this._content;
   }
 
-  constructor(
-    private _lastModifiedDate: Date,
-    private _name: string,
-    private _size: number,
-    private _type: string,
-    private _readMode: ReadMode,
-    private _content: any) {
+  get underlyingFile(): File {
+    return this._underlyingFile;
   }
+
+  constructor(
+    private _underlyingFile: File,
+    private _readMode: ReadMode,
+    private _content: any
+  ) {}
 }
