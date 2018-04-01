@@ -1,4 +1,10 @@
-import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  Directive,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output
+} from '@angular/core';
 
 import { ReadFile } from './read-file';
 import { ReadFileImpl } from './read-file-impl';
@@ -10,8 +16,7 @@ import { ReadMode } from './read-mode.enum';
 export class FileDropzoneDirective {
   @Input('ngxFileDropzone') readMode: ReadMode;
 
-  @Output()
-  public fileDrop = new EventEmitter<ReadFile>();
+  @Output() public fileDrop = new EventEmitter<ReadFile>();
 
   @HostListener('dragenter', ['$event'])
   public onDragEnter(event) {
@@ -43,7 +48,7 @@ export class FileDropzoneDirective {
 
     reader.onload = (loaded: ProgressEvent) => {
       const fileReader = loaded.target as FileReader;
-      const readFile = new ReadFileImpl(file.lastModifiedDate, file.name, file.size, file.type, this.readMode, fileReader.result);
+      const readFile = new ReadFileImpl(file, this.readMode, fileReader.result);
 
       this.fileDrop.emit(readFile);
     };

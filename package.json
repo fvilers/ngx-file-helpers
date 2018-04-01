@@ -1,6 +1,6 @@
 {
   "name": "ngx-file-helpers",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.4",
   "description": "Angular File Helpers",
   "main": "./bundles/ngx-file-helpers.umd.js",
   "module": "./esm5/ngx-file-helpers.js",
