@@ -17,29 +17,28 @@ import { ReadMode } from './read-mode.enum';
   selector: '[ngxFilePicker]'
 })
 export class FilePickerDirective implements OnInit {
-  @Input()
-  public accept = '';
+  @Input() public accept = '';
 
   @Input()
-  get multiple() { return this._multiple; }
-  set multiple(value: any) { this._multiple = coerceBooleanProperty(value); }
+  get multiple() {
+    return this._multiple;
+  }
+  set multiple(value: any) {
+    this._multiple = coerceBooleanProperty(value);
+  }
 
   @Input('ngxFilePicker') readMode: ReadMode;
 
-  @Output()
-  public filePick = new EventEmitter<ReadFile>();
+  @Output() public filePick = new EventEmitter<ReadFile>();
 
-  @Output()
-  public readStart = new EventEmitter<number>();
+  @Output() public readStart = new EventEmitter<number>();
 
-  @Output()
-  public readEnd = new EventEmitter<number>();
+  @Output() public readEnd = new EventEmitter<number>();
 
   private _multiple: boolean;
   private input: any;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
-  }
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   public ngOnInit() {
     this.input = this.renderer.createElement('input');
@@ -57,14 +56,17 @@ export class FilePickerDirective implements OnInit {
       const fileCount = event.target.files.length;
 
       this.readStart.emit(event.target.files.length);
-      Promise.all(Array.from<File>(event.target.files).map(file => this.readFile(file)))
-        .then(() => this.readEnd.emit(fileCount));
+      Promise.all(
+        Array.from<File>(event.target.files).map(file => this.readFile(file))
+      ).then(() => this.readEnd.emit(fileCount));
     });
   }
 
   public reset() {
     if (!this.input) {
-      console.error('It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?');
+      console.error(
+        'It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?'
+      );
       return;
     }
 
@@ -74,7 +76,9 @@ export class FilePickerDirective implements OnInit {
   @HostListener('click')
   private browse() {
     if (!this.input) {
-      console.error('It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?');
+      console.error(
+        'It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?'
+      );
       return;
     }
 
@@ -87,7 +91,11 @@ export class FilePickerDirective implements OnInit {
 
       reader.onload = (loaded: ProgressEvent) => {
         const fileReader = loaded.target as FileReader;
-        const readFile = new ReadFileImpl(file.lastModifiedDate, file.name, file.size, file.type, this.readMode, fileReader.result);
+        const readFile = new ReadFileImpl(
+          file,
+          this.readMode,
+          fileReader.result
+        );
 
         this.filePick.emit(readFile);
         resolve();
