@@ -74,7 +74,7 @@ export class FilePickerDirective implements OnInit {
   }
 
   @HostListener('click')
-  private browse() {
+  public browse() {
     if (!this.input) {
       console.error(
         'It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?'
