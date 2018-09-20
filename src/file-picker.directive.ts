@@ -29,6 +29,8 @@ export class FilePickerDirective implements OnInit {
 
   @Input('ngxFilePicker') readMode: ReadMode;
 
+  @Input() filter: (file) => boolean = () => true;
+
   @Output() public filePick = new EventEmitter<ReadFile>();
 
   @Output() public readStart = new EventEmitter<number>();
@@ -53,11 +55,13 @@ export class FilePickerDirective implements OnInit {
     }
 
     this.renderer.listen(this.input, 'change', (event: any) => {
-      const fileCount = event.target.files.length;
+      const files = Array.from<File>(event.target.files).filter(this.filter);
+      const fileCount = files.length;
 
-      this.readStart.emit(event.target.files.length);
+      this.readStart.emit(fileCount);
       Promise.all(
-        Array.from<File>(event.target.files).map(file => this.readFile(file))
+        files
+        .map(file => this.readFile(file))
       ).then(() => this.readEnd.emit(fileCount));
     });
   }
