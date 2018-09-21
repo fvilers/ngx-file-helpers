@@ -125,7 +125,7 @@ export class MyComponent {
   ngxFilePicker
   accept="*"
   multiple
-  (filter)="filterFileBeforeReading"
+  [filter]="filterFileBeforeReading"
   (filePick)="file = $event">
   Browse
 </button>
