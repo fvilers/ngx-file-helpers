@@ -105,6 +105,32 @@ There are two more events that can be listened to:
 
 These two events emit the number of file (`$event` variable) to be or that has been read.
 
+In some cases you may want to filter files before reading them. You could use a special input argument `filter` which takes a function which should return `true` file to be read or `false` to stop reading.
+
+```
+export class MyComponent {
+  ...
+
+  filterFileBeforeReading(file) {
+    // file is a native browser File
+    // skip files which are >25mb
+    return file.size < 25 * 1000 * 1000;
+  }
+}
+```
+
+```
+<button
+  type="button"
+  ngxFilePicker
+  accept="*"
+  multiple
+  [filter]="filterFileBeforeReading"
+  (filePick)="file = $event">
+  Browse
+</button>
+```
+
 ## File Dropzone
 
 Add the file dropzone directive to an element, like a div.
