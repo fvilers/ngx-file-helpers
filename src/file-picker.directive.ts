@@ -14,7 +14,8 @@ import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
 
 @Directive({
-  selector: '[ngxFilePicker]'
+  selector: '[ngxFilePicker]',
+  exportAs: 'ngxFilePicker'
 })
 export class FilePickerDirective implements OnInit {
   @Input() public accept = '';
@@ -59,10 +60,9 @@ export class FilePickerDirective implements OnInit {
       const fileCount = files.length;
 
       this.readStart.emit(fileCount);
-      Promise.all(
-        files
-        .map(file => this.readFile(file))
-      ).then(() => this.readEnd.emit(fileCount));
+      Promise.all(files.map(file => this.readFile(file))).then(() =>
+        this.readEnd.emit(fileCount)
+      );
     });
   }
 
