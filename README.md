@@ -1,7 +1,9 @@
 # ngx-file-helpers
+
 Angular File Helpers
 
 ## Installation
+
 Add the package to your application.
 
 ```
@@ -9,6 +11,7 @@ npm install --save ngx-file-helpers
 ```
 
 ## Demo
+
 https://stackblitz.com/edit/ngx-file-helpers-demo
 
 ## Getting started
@@ -83,13 +86,21 @@ Use the optional `multiple` attribute to indicate whether the user can pick more
 </button>
 ```
 
-The directive also has a `reset()` method that unset the selected file. This is useful if you want to force the `filePick` event to trigger again even if the user has picked the same file.
+The directive also has a `reset()` method that unset the selected file. This is useful if you want to force the `filePick` event to trigger again even if the user has picked the same file. The directive is exported as `ngxFilePicker` so you can select is using a `ViewChild` decorator.
+
+```
+<button
+  ngxFilePicker
+  #myFilePicker="ngxFilePicker">
+  Browse
+</button>
+```
 
 ```
 export class MyComponent {
   ...
-  @ViewChild(FilePickerDirective)
-  private filePicker;
+  @ViewChild('myFilePicker')
+  private filePicker: FilePickerDirective;
   ...
 
   onReadEnd(fileCount: number) {
@@ -100,6 +111,7 @@ export class MyComponent {
 ```
 
 There are two more events that can be listened to:
+
 - `readStart`: triggered when the directive start to read files;
 - `readEnd`: triggered when the directive has read all the files.
 
@@ -154,6 +166,8 @@ Bind to the `fileDrop` event to get the dropped file from the `$event` variable.
   Drop a file in this zone.
 </div>
 ```
+
+The directive is exported as `ngxFileDropzone` so you can select is using a `ViewChild` decorator.
 
 ## ReadFile
 
