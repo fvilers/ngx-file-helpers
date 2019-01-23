@@ -30,7 +30,7 @@ export class FilePickerDirective implements OnInit {
 
   @Input('ngxFilePicker') readMode: ReadMode;
 
-  @Input() filter: (file) => boolean = () => true;
+  @Input() filter: (file: any) => boolean = () => true;
 
   @Output() public filePick = new EventEmitter<ReadFile>();
 
