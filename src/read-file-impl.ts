@@ -2,10 +2,6 @@ import { ReadFile } from './read-file';
 import { ReadMode } from './read-mode.enum';
 
 export class ReadFileImpl implements ReadFile {
-  get lastModifiedDate(): Date {
-    return this._underlyingFile.lastModifiedDate;
-  }
-
   get name(): string {
     return this._underlyingFile.name;
   }

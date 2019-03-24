@@ -175,7 +175,6 @@ The read file implements the following interface:
 
 ```
 interface ReadFile {
-  lastModifiedDate: Date;
   name: string;
   size: number;
   type: string;
