@@ -1,53 +1,48 @@
 {
-  "name": "ngx-file-helpers",
-  "version": "1.2.0",
-  "description": "Angular File Helpers",
-  "main": "./bundles/ngx-file-helpers.umd.js",
-  "module": "./esm5/ngx-file-helpers.js",
-  "es2015": "./esm2015/ngx-file-helpers.js",
-  "typings": "./ngx-file-helpers.d.ts",
+  "name": "ngx-file-helpers-demo",
+  "version": "0.0.0",
   "scripts": {
-    "clean": "shx rm -rf dist/ && shx rm -rf build/",
-    "build:esm2015": "ngc -p tsconfig-esm2015.json",
-    "build:fesm2015": "rollup -c rollup-esm2015.conf.js",
-    "build:esm5": "ngc -p tsconfig-esm5.json",
-    "build:fesm5": "rollup -c rollup-esm5.conf.js",
-    "build:umd": "rollup -c rollup-umd.conf.js",
-    "build:umd:min": "uglifyjs dist/bundles/ngx-file-helpers.umd.js -c -m -o dist/bundles/ngx-file-helpers.umd.min.js",
-    "copy:assets": "shx cp -r build/esm2015/*.d.ts build/esm2015/src build/esm2015/*.json package.json README.md dist/ && shx rm dist/src/*.js",
-    "build": "npm run clean && npm run build:esm2015 && npm run build:fesm2015 && npm run build:esm5 && npm run build:fesm5 && npm run build:umd && npm run build:umd:min && npm run copy:assets",
-    "version": "npm run build",
-    "postversion": "git push && git push --tags && npm publish dist"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fvilers/ngx-file-helpers.git"
-  },
-  "keywords": [
-    "angular",
-    "file",
-    "helpers"
-  ],
-  "author": "Fabian Vilers <fabian.vilers@dev-one.com> (https://www.dev-one.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fvilers/ngx-file-helpers/issues"
-  },
-  "homepage": "https://github.com/fvilers/ngx-file-helpers#readme",
-  "peerDependencies": {
-    "@angular/core": "^5.0.0",
-    "@angular/common": "^5.0.0"
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~7.2.0",
+    "@angular/common": "~7.2.0",
+    "@angular/compiler": "~7.2.0",
+    "@angular/core": "~7.2.0",
+    "@angular/forms": "~7.2.0",
+    "@angular/platform-browser": "~7.2.0",
+    "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/router": "~7.2.0",
+    "core-js": "^2.5.4",
+    "rxjs": "~6.3.3",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular/common": "^5.2.1",
-    "@angular/compiler": "^5.2.1",
-    "@angular/compiler-cli": "^5.2.1",
-    "@angular/core": "^5.2.1",
-    "rollup": "0.55.0",
-    "rxjs": "^5.5.6",
-    "shx": "0.2.2",
-    "typescript": "^2.6.2",
-    "uglify-js": "3.3.8",
-    "zone.js": "^0.8.20"
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular/cli": "~7.3.1",
+    "@angular/compiler-cli": "~7.2.0",
+    "@angular/language-service": "~7.2.0",
+    "@types/node": "~8.9.4",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "~2.0.3",
+    "codelyzer": "~4.5.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~3.1.1",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~5.4.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.11.0",
+    "typescript": "~3.2.2"
   }
 }
