@@ -6,6 +6,7 @@
     "start": "ng serve",
     "start:lib": "ng build ngx-file-helpers --watch",
     "build": "ng build",
+    "build:lib": "ng build ngx-file-helpers",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
