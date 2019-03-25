@@ -15,6 +15,10 @@ export class FilePickerDemoComponent {
   @ViewChild('filePicker')
   private filePicker: FilePickerDirective;
 
+  ignoreTooBigFile(file: File): boolean {
+    return file.size < 100000;
+  }
+
   onReadStart(fileCount: number) {
     this.status = `Reading ${fileCount} file(s)...`;
   }

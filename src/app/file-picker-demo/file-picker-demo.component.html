@@ -21,6 +21,7 @@
   ngxFilePicker
   [readMode]="readMode"
   multiple
+  [filter]="ignoreTooBigFile"
   accept="image/*"
   (readStart)="onReadStart($event)"
   (filePick)="onFilePicked($event)"
