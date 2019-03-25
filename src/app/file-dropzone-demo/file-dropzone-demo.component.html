@@ -2,7 +2,8 @@
 
 <div
   class="dropzone"
-  [ngxFileDropzone]="readMode"
+  ngxFileDropzone
+  [readMode]="readMode"
   (fileDrop)="addFile($event)"
 ></div>
 

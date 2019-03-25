@@ -9,30 +9,15 @@ import {
 import { ReadFile } from './read-file';
 import { ReadMode } from './read-mode.enum';
 import { readFileAsync } from './helpers';
+import { FileHandler } from './file-handler';
 
 @Directive({
   selector: '[ngxFileDropzone]',
   exportAs: 'ngxFileDropzone'
 })
-export class FileDropzoneDirective {
-  @Input('ngxFileDropzone')
-  public readMode: ReadMode;
-
-  @Input()
-  public filter: (
-    file: File,
-    index: number,
-    files: Array<File>
-  ) => boolean = () => true;
-
+export class FileDropzoneDirective extends FileHandler {
   @Output()
   public fileDrop = new EventEmitter<ReadFile>();
-
-  @Output()
-  public readStart = new EventEmitter<number>();
-
-  @Output()
-  public readEnd = new EventEmitter<number>();
 
   @HostListener('dragenter', ['$event'])
   public onDragEnter(event: DragEvent) {
@@ -51,17 +36,8 @@ export class FileDropzoneDirective {
     event.stopPropagation();
     event.preventDefault();
 
-    const files = Array.from<File>(event.dataTransfer.files).filter(
-      this.filter
+    this.readFiles(event.dataTransfer.files, readFile =>
+      this.fileDrop.emit(readFile)
     );
-    const fileCount = files.length;
-
-    this.readStart.emit(fileCount);
-    Promise.all(
-      files.map(async file => {
-        const readFile = await readFileAsync(file, this.readMode);
-        this.fileDrop.emit(readFile);
-      })
-    ).then(() => this.readEnd.emit(fileCount));
   }
 }

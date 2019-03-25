@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 
 import { ReadFile } from './read-file';
-import { ReadMode } from './read-mode.enum';
 import { coerceBooleanProperty, readFileAsync } from './helpers';
+import { FileHandler } from './file-handler';
 
 @Directive({
   selector: '[ngxFilePicker]',
   exportAs: 'ngxFilePicker'
 })
-export class FilePickerDirective implements OnInit {
+export class FilePickerDirective extends FileHandler implements OnInit {
   @Input()
   public accept = '';
 
@@ -30,28 +30,14 @@ export class FilePickerDirective implements OnInit {
   }
   private _multiple: boolean;
 
-  @Input('ngxFilePicker')
-  public readMode: ReadMode;
-
-  @Input()
-  public filter: (
-    file: File,
-    index: number,
-    files: Array<File>
-  ) => boolean = () => true;
-
   @Output()
   public filePick = new EventEmitter<ReadFile>();
 
-  @Output()
-  public readStart = new EventEmitter<number>();
-
-  @Output()
-  public readEnd = new EventEmitter<number>();
-
   private _input: any;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    super();
+  }
 
   public ngOnInit() {
     this._input = this.renderer.createElement('input');
@@ -96,15 +82,7 @@ export class FilePickerDirective implements OnInit {
   // The callback signature prevent the async/await usage
   private _onListen(event: Event) {
     const target = event.target as HTMLInputElement;
-    const files = Array.from<File>(target.files).filter(this.filter);
-    const fileCount = files.length;
 
-    this.readStart.emit(fileCount);
-    Promise.all(
-      files.map(async file => {
-        const readFile = await readFileAsync(file, this.readMode);
-        this.filePick.emit(readFile);
-      })
-    ).then(() => this.readEnd.emit(fileCount));
+    this.readFiles(target.files, readFile => this.filePick.emit(readFile));
   }
 }
