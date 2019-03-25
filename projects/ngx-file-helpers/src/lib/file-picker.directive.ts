@@ -12,33 +12,40 @@ import {
 import { ReadFile } from './read-file';
 import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
+import { coerceBooleanProperty } from './helpers';
 
 @Directive({
   selector: '[ngxFilePicker]',
   exportAs: 'ngxFilePicker'
 })
 export class FilePickerDirective implements OnInit {
-  @Input() public accept = '';
+  @Input()
+  public accept = '';
 
   @Input()
-  get multiple() {
+  public get multiple(): boolean {
     return this._multiple;
   }
-  set multiple(value: any) {
+  public set multiple(value: boolean) {
     this._multiple = coerceBooleanProperty(value);
   }
-
-  @Input('ngxFilePicker') readMode: ReadMode;
-
-  @Input() filter: (file: any) => boolean = () => true;
-
-  @Output() public filePick = new EventEmitter<ReadFile>();
-
-  @Output() public readStart = new EventEmitter<number>();
-
-  @Output() public readEnd = new EventEmitter<number>();
-
   private _multiple: boolean;
+
+  @Input('ngxFilePicker')
+  public readMode: ReadMode;
+
+  @Input()
+  public filter: (file: any) => boolean = () => true;
+
+  @Output()
+  public filePick = new EventEmitter<ReadFile>();
+
+  @Output()
+  public readStart = new EventEmitter<number>();
+
+  @Output()
+  public readEnd = new EventEmitter<number>();
+
   private input: any;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
@@ -55,8 +62,9 @@ export class FilePickerDirective implements OnInit {
       this.renderer.setAttribute(this.input, 'multiple', 'multiple');
     }
 
-    this.renderer.listen(this.input, 'change', (event: any) => {
-      const files = Array.from<File>(event.target.files).filter(this.filter);
+    this.renderer.listen(this.input, 'change', (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      const files = Array.from<File>(target.files).filter(this.filter);
       const fileCount = files.length;
 
       this.readStart.emit(fileCount);
@@ -122,8 +130,4 @@ export class FilePickerDirective implements OnInit {
       }
     });
   }
-}
-
-function coerceBooleanProperty(value: any): boolean {
-  return value != null && `${value}` !== 'false';
 }

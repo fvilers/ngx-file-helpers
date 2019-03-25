@@ -15,24 +15,26 @@ import { ReadMode } from './read-mode.enum';
   exportAs: 'ngxFileDropzone'
 })
 export class FileDropzoneDirective {
-  @Input('ngxFileDropzone') readMode: ReadMode;
+  @Input('ngxFileDropzone')
+  public readMode: ReadMode;
 
-  @Output() public fileDrop = new EventEmitter<ReadFile>();
+  @Output()
+  public fileDrop = new EventEmitter<ReadFile>();
 
   @HostListener('dragenter', ['$event'])
-  public onDragEnter(event) {
+  public onDragEnter(event: DragEvent) {
     event.stopPropagation();
     event.preventDefault();
   }
 
   @HostListener('dragover', ['$event'])
-  public onDragOver(event) {
+  public onDragOver(event: DragEvent) {
     event.stopPropagation();
     event.preventDefault();
   }
 
   @HostListener('drop', ['$event'])
-  public onDrop(event) {
+  public onDrop(event: DragEvent) {
     event.stopPropagation();
     event.preventDefault();
 
