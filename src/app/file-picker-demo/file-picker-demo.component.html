@@ -17,8 +17,8 @@
 <button
   type="button"
   mat-button
-  #filePicker="ngxFilePicker"
   [ngxFilePicker]="readMode"
+  #filePicker="ngxFilePicker"
   multiple
   accept="image/*"
   (readStart)="onReadStart($event)"

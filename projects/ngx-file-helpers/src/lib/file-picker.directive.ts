@@ -10,9 +10,8 @@ import {
 } from '@angular/core';
 
 import { ReadFile } from './read-file';
-import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
-import { coerceBooleanProperty } from './helpers';
+import { coerceBooleanProperty, readFileAsync } from './helpers';
 
 @Directive({
   selector: '[ngxFilePicker]',
@@ -35,7 +34,11 @@ export class FilePickerDirective implements OnInit {
   public readMode: ReadMode;
 
   @Input()
-  public filter: (file: any) => boolean = () => true;
+  public filter: (
+    file: File,
+    index: number,
+    files: Array<File>
+  ) => boolean = () => true;
 
   @Output()
   public filePick = new EventEmitter<ReadFile>();
@@ -46,88 +49,62 @@ export class FilePickerDirective implements OnInit {
   @Output()
   public readEnd = new EventEmitter<number>();
 
-  private input: any;
+  private _input: any;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   public ngOnInit() {
-    this.input = this.renderer.createElement('input');
-    this.renderer.appendChild(this.el.nativeElement, this.input);
+    this._input = this.renderer.createElement('input');
+    this.renderer.appendChild(this.el.nativeElement, this._input);
 
-    this.renderer.setAttribute(this.input, 'type', 'file');
-    this.renderer.setAttribute(this.input, 'accept', this.accept);
-    this.renderer.setStyle(this.input, 'display', 'none');
+    this.renderer.setAttribute(this._input, 'type', 'file');
+    this.renderer.setAttribute(this._input, 'accept', this.accept);
+    this.renderer.setStyle(this._input, 'display', 'none');
 
     if (this.multiple) {
-      this.renderer.setAttribute(this.input, 'multiple', 'multiple');
+      this.renderer.setAttribute(this._input, 'multiple', 'multiple');
     }
 
-    this.renderer.listen(this.input, 'change', (event: Event) => {
-      const target = event.target as HTMLInputElement;
-      const files = Array.from<File>(target.files).filter(this.filter);
-      const fileCount = files.length;
-
-      this.readStart.emit(fileCount);
-      Promise.all(files.map(file => this.readFile(file))).then(() =>
-        this.readEnd.emit(fileCount)
-      );
-    });
+    this.renderer.listen(this._input, 'change', (event: Event) =>
+      this._onListen(event)
+    );
   }
 
   public reset() {
-    if (!this.input) {
+    if (!this._input) {
       console.error(
-        'It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?'
+        'It seems that ngOnInit() has not been executed or that the hidden _input element is null. Did you mess with the DOM?'
       );
       return;
     }
 
-    this.input.value = null;
+    this._input.value = null;
   }
 
   @HostListener('click')
   public browse() {
-    if (!this.input) {
+    if (!this._input) {
       console.error(
-        'It seems that ngOnInit() has not been executed or that the hidden input element is null. Did you mess with the DOM?'
+        'It seems that ngOnInit() has not been executed or that the hidden _input element is null. Did you mess with the DOM?'
       );
       return;
     }
 
-    this.input.click();
+    this._input.click();
   }
 
-  private readFile(file: File): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+  // The callback signature prevent the async/await usage
+  private _onListen(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const files = Array.from<File>(target.files).filter(this.filter);
+    const fileCount = files.length;
 
-      reader.onload = (loaded: ProgressEvent) => {
-        const fileReader = loaded.target as FileReader;
-        const readFile = new ReadFileImpl(
-          file,
-          this.readMode,
-          fileReader.result
-        );
-
+    this.readStart.emit(fileCount);
+    Promise.all(
+      files.map(async file => {
+        const readFile = await readFileAsync(file, this.readMode);
         this.filePick.emit(readFile);
-        resolve();
-      };
-
-      switch (this.readMode) {
-        case ReadMode.arrayBuffer:
-          reader.readAsArrayBuffer(file);
-          break;
-        case ReadMode.binaryString:
-          reader.readAsBinaryString(file);
-          break;
-        case ReadMode.text:
-          reader.readAsText(file);
-          break;
-        case ReadMode.dataURL:
-        default:
-          reader.readAsDataURL(file);
-          break;
-      }
-    });
+      })
+    ).then(() => this.readEnd.emit(fileCount));
   }
 }

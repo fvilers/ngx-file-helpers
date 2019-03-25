@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 
 import { ReadFile } from './read-file';
-import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
+import { readFileAsync } from './helpers';
 
 @Directive({
   selector: '[ngxFileDropzone]',
@@ -18,8 +18,21 @@ export class FileDropzoneDirective {
   @Input('ngxFileDropzone')
   public readMode: ReadMode;
 
+  @Input()
+  public filter: (
+    file: File,
+    index: number,
+    files: Array<File>
+  ) => boolean = () => true;
+
   @Output()
   public fileDrop = new EventEmitter<ReadFile>();
+
+  @Output()
+  public readStart = new EventEmitter<number>();
+
+  @Output()
+  public readEnd = new EventEmitter<number>();
 
   @HostListener('dragenter', ['$event'])
   public onDragEnter(event: DragEvent) {
@@ -38,38 +51,17 @@ export class FileDropzoneDirective {
     event.stopPropagation();
     event.preventDefault();
 
-    var dt = event.dataTransfer;
-    var files = dt.files;
+    const files = Array.from<File>(event.dataTransfer.files).filter(
+      this.filter
+    );
+    const fileCount = files.length;
 
-    for (let i = 0; i < files.length; i++) {
-      this.readFile(files[i]);
-    }
-  }
-
-  private readFile(file: File) {
-    const reader = new FileReader();
-
-    reader.onload = (loaded: ProgressEvent) => {
-      const fileReader = loaded.target as FileReader;
-      const readFile = new ReadFileImpl(file, this.readMode, fileReader.result);
-
-      this.fileDrop.emit(readFile);
-    };
-
-    switch (this.readMode) {
-      case ReadMode.arrayBuffer:
-        reader.readAsArrayBuffer(file);
-        break;
-      case ReadMode.binaryString:
-        reader.readAsBinaryString(file);
-        break;
-      case ReadMode.text:
-        reader.readAsText(file);
-        break;
-      case ReadMode.dataURL:
-      default:
-        reader.readAsDataURL(file);
-        break;
-    }
+    this.readStart.emit(fileCount);
+    Promise.all(
+      files.map(async file => {
+        const readFile = await readFileAsync(file, this.readMode);
+        this.fileDrop.emit(readFile);
+      })
+    ).then(() => this.readEnd.emit(fileCount));
   }
 }
