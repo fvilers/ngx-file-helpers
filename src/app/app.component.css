@@ -1,0 +1,11 @@
+.filler {
+  flex: 1 1 auto;
+}
+
+main {
+  padding: 20px;
+}
+
+.tab-container {
+  padding: 5px;
+}
