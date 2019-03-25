@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-file-helpers": [
+        "dist/ngx-file-helpers"
+      ],
+      "ngx-file-helpers/*": [
+        "dist/ngx-file-helpers/*"
+      ]
+    }
   }
 }

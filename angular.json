@@ -130,6 +130,41 @@
           }
         }
       }
+    },
+    "ngx-file-helpers": {
+      "root": "projects/ngx-file-helpers",
+      "sourceRoot": "projects/ngx-file-helpers/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-file-helpers/tsconfig.lib.json",
+            "project": "projects/ngx-file-helpers/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-file-helpers/src/test.ts",
+            "tsConfig": "projects/ngx-file-helpers/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-file-helpers/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-file-helpers/tsconfig.lib.json",
+              "projects/ngx-file-helpers/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-file-helpers-demo"
