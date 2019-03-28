@@ -1,0 +1,14 @@
+.dropzone {
+  align-items: center;
+  background: lightgrey;
+  border: dashed 1px grey;
+  display: flex;
+  justify-content: center;
+  height: 350px;
+  width: 500px;
+}
+
+.hover {
+  background: grey;
+  border: dashed 1px darkgrey;
+}

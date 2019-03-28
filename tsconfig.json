@@ -1,18 +1,30 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
-    "rootDir": "./src",
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2015",
+      "es2018",
       "dom"
     ],
-    "skipLibCheck": true
+    "paths": {
+      "ngx-file-helpers": [
+        "dist/ngx-file-helpers"
+      ],
+      "ngx-file-helpers/*": [
+        "dist/ngx-file-helpers/*"
+      ]
+    }
   }
 }

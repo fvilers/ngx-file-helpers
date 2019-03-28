@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <h1>Angular File Helpers Demo</h1>
+  <span class="filler"></span>
+  <a href="https://github.com/fvilers/ngx-file-helpers" mat-button>
+    GitHub
+  </a>
+</mat-toolbar>
+
+<main class="mat-typography">
+  <mat-tab-group dynamicHeight="true">
+    <mat-tab label="File Picker">
+      <div class="tab-container">
+        <app-file-picker-demo></app-file-picker-demo>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="File Dropzone">
+      <div class="tab-container">
+        <app-file-dropzone-demo></app-file-dropzone-demo>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</main>
