@@ -18,14 +18,7 @@ https://stackblitz.com/edit/ngx-file-helpers-demo
 
 If you use and like this library, feel free to support my Open Source projects.
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_donations" />
-<input type="hidden" name="business" value="JZ26X897M9V9L" />
-<input type="hidden" name="item_name" value="Help support my Open Source projects" />
-<input type="hidden" name="currency_code" value="EUR" />
-<input type="image" src="https://www.paypalobjects.com/en_US/BE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_BE/i/scr/pixel.gif" width="1" height="1" />
-</form>
+[![donate](https://www.paypalobjects.com/en_US/BE/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JZ26X897M9V9L&currency_code=EUR)
 
 ## Breaking changes
 
