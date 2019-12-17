@@ -83,6 +83,9 @@ export class FilePickerDirective extends FileHandler implements OnInit {
   private _onListen(event: Event) {
     const target = event.target as HTMLInputElement;
 
-    this.readFiles(target.files, readFile => this.filePick.emit(readFile));
+    this
+      .readFiles(target.files, readFile => this.filePick.emit(readFile))
+      // reset value to trick change event making it changeable every time
+      .finally(() => target.value = '');
   }
 }
