@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { FilePickerDirective, ReadFile, ReadMode } from 'ngx-file-helpers';
 
 @Component({
@@ -12,7 +11,7 @@ export class FilePickerDemoComponent {
   public picked: ReadFile;
   public status: string;
 
-  @ViewChild('filePicker')
+  @ViewChild('filePicker', { static: false })
   private filePicker: FilePickerDirective;
 
   ignoreTooBigFile(file: File): boolean {
