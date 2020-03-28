@@ -2,16 +2,15 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Input,
   HostListener,
+  Input,
   OnInit,
   Output,
   Renderer2
 } from '@angular/core';
-
-import { ReadFile } from './read-file';
-import { coerceBooleanProperty, readFileAsync } from './helpers';
 import { FileHandler } from './file-handler';
+import { coerceBooleanProperty } from './helpers';
+import { ReadFile } from './read-file';
 
 @Directive({
   selector: '[ngxFilePicker]',
@@ -83,9 +82,8 @@ export class FilePickerDirective extends FileHandler implements OnInit {
   private _onListen(event: Event) {
     const target = event.target as HTMLInputElement;
 
-    this
-      .readFiles(target.files, readFile => this.filePick.emit(readFile))
+    this.readFiles(target.files, readFile => this.filePick.emit(readFile))
       // reset value to trick change event making it changeable every time
-      .finally(() => target.value = '');
+      .finally(() => (target.value = ''));
   }
 }

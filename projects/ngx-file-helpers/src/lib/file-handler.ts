@@ -1,7 +1,7 @@
 import { EventEmitter, Input, Output } from '@angular/core';
-import { ReadMode } from './read-mode.enum';
 import { readFileAsync } from './helpers';
 import { ReadFile } from './read-file';
+import { ReadMode } from './read-mode.enum';
 
 export abstract class FileHandler {
   @Input()
