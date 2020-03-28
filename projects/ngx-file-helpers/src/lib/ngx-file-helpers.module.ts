@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 import { FileDropzoneDirective } from './file-dropzone.directive';
 import { FilePickerDirective } from './file-picker.directive';
 

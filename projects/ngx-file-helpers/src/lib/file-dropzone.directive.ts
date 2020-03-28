@@ -1,15 +1,6 @@
-import {
-  Directive,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output
-} from '@angular/core';
-
-import { ReadFile } from './read-file';
-import { ReadMode } from './read-mode.enum';
-import { readFileAsync } from './helpers';
+import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 import { FileHandler } from './file-handler';
+import { ReadFile } from './read-file';
 
 @Directive({
   selector: '[ngxFileDropzone]',
