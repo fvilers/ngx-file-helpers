@@ -1,11 +1,6 @@
 <span class="mat-title">Drop a file</span>
 
-<div
-  class="dropzone"
-  ngxFileDropzone
-  [readMode]="readMode"
-  (fileDrop)="addFile($event)"
-></div>
+<div class="dropzone" ngxFileDropzone [readMode]="readMode" (fileDrop)="addFile($event)"></div>
 
 <span class="mat-title" *ngIf="files.length">Dropped files</span>
 <ul>

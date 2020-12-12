@@ -4,7 +4,7 @@ import { ReadFile } from './read-file';
 
 @Directive({
   selector: '[ngxFileDropzone]',
-  exportAs: 'ngxFileDropzone'
+  exportAs: 'ngxFileDropzone',
 })
 export class FileDropzoneDirective extends FileHandler {
   @Output()
@@ -27,8 +27,10 @@ export class FileDropzoneDirective extends FileHandler {
     event.stopPropagation();
     event.preventDefault();
 
-    this.readFiles(event.dataTransfer.files, readFile =>
-      this.fileDrop.emit(readFile)
-    );
+    if (event.dataTransfer !== null) {
+      this.readFiles(event.dataTransfer.files, (readFile) =>
+        this.fileDrop.emit(readFile)
+      );
+    }
   }
 }

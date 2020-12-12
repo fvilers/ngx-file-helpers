@@ -1,11 +1,12 @@
-import { EventEmitter, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { readFileAsync } from './helpers';
 import { ReadFile } from './read-file';
 import { ReadMode } from './read-mode.enum';
 
+@Directive()
 export abstract class FileHandler {
   @Input()
-  public readMode: ReadMode;
+  public readMode: ReadMode = ReadMode.dataURL;
 
   @Input()
   public filter: (
@@ -30,7 +31,7 @@ export abstract class FileHandler {
     this.readStart.emit(fileCount);
 
     await Promise.all(
-      filteredFiles.map(async file => {
+      filteredFiles.map(async (file) => {
         const readFile = await readFileAsync(file, this.readMode);
         onFileRead(readFile);
       })

@@ -2,10 +2,6 @@ import { ReadFile } from './read-file';
 import { ReadFileImpl } from './read-file-impl';
 import { ReadMode } from './read-mode.enum';
 
-export function coerceBooleanProperty(value: any): boolean {
-  return value != null && `${value}` !== 'false';
-}
-
 export async function readFileAsync(
   file: File,
   readMode: ReadMode

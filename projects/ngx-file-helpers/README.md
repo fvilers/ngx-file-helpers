@@ -16,6 +16,14 @@ https://stackblitz.com/edit/ngx-file-helpers-demo
 
 ## Breaking changes
 
+Here's a list of the breaking changes upon the 5.0 release:
+
+- Angular (core/common) version 11.0.0 or greater is a peer dependency;
+
+Here's a list of the breaking changes upon the 4.0 release:
+
+- Angular (core/common) version 9.1.0 or greater is a peer dependency;
+
 Here's a list of the breaking changes upon the 3.0 release:
 
 - Angular (core/common) version 8.2.0 or greater is a peer dependency;
@@ -24,7 +32,7 @@ Here's a list of the breaking changes upon the 2.0 release:
 
 - Angular (core/common) version 7.2.0 or greater is a peer dependency;
 - The module name has changed to `NgxFileHelpersModule`;
-- Read mode is not anymore binded using the directive name but the `[readMode]` property;
+- Read mode is not anymore bound using the directive name but the `[readMode]` property;
 - The `lastModifiedDate` property doesn't exist anymore on the `ReadFile` interface.
 
 ## Getting started

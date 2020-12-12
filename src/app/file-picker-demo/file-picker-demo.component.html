@@ -14,18 +14,8 @@
   </figcaption>
 </figure>
 
-<button
-  type="button"
-  mat-button
-  #filePicker="ngxFilePicker"
-  ngxFilePicker
-  [readMode]="readMode"
-  multiple
-  [filter]="ignoreTooBigFile"
-  accept="image/*"
-  (readStart)="onReadStart($event)"
-  (filePick)="onFilePicked($event)"
-  (readEnd)="onReadEnd($event)"
->
+<button type="button" mat-button #filePicker="ngxFilePicker" ngxFilePicker [readMode]="readMode" [multiple]="true"
+  [filter]="ignoreTooBigFile" accept="image/*" (readStart)="onReadStart($event)" (filePick)="onFilePicked($event)"
+  (readEnd)="onReadEnd($event)">
   Browse
 </button>

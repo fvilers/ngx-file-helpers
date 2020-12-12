@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   Directive,
   ElementRef,
@@ -6,15 +7,14 @@ import {
   Input,
   OnInit,
   Output,
-  Renderer2
+  Renderer2,
 } from '@angular/core';
 import { FileHandler } from './file-handler';
-import { coerceBooleanProperty } from './helpers';
 import { ReadFile } from './read-file';
 
 @Directive({
   selector: '[ngxFilePicker]',
-  exportAs: 'ngxFilePicker'
+  exportAs: 'ngxFilePicker',
 })
 export class FilePickerDirective extends FileHandler implements OnInit {
   @Input()
@@ -27,7 +27,7 @@ export class FilePickerDirective extends FileHandler implements OnInit {
   public set multiple(value: boolean) {
     this._multiple = coerceBooleanProperty(value);
   }
-  private _multiple: boolean;
+  private _multiple: boolean = false;
 
   @Output()
   public filePick = new EventEmitter<ReadFile>();
@@ -82,8 +82,10 @@ export class FilePickerDirective extends FileHandler implements OnInit {
   private _onListen(event: Event) {
     const target = event.target as HTMLInputElement;
 
-    this.readFiles(target.files, readFile => this.filePick.emit(readFile))
-      // reset value to trick change event making it changeable every time
-      .finally(() => (target.value = ''));
+    if (target.files !== null) {
+      this.readFiles(target.files, (readFile) => this.filePick.emit(readFile))
+        // reset value to trick change event making it changeable every time
+        .finally(() => (target.value = ''));
+    }
   }
 }
