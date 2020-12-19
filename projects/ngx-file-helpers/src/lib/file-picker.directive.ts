@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   Directive,
   ElementRef,
@@ -10,6 +9,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FileHandler } from './file-handler';
+import { coerceBooleanProperty } from './helpers';
 import { ReadFile } from './read-file';
 
 @Directive({
