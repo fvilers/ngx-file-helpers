@@ -16,6 +16,10 @@ https://stackblitz.com/edit/ngx-file-helpers-demo
 
 ## Breaking changes
 
+Here's a list of the breaking changes upon the 6.0 release:
+
+- Angular (core/common) version 21.0.0 or greater is a peer dependency;
+
 Here's a list of the breaking changes upon the 5.0 release:
 
 - Angular (core/common) version 11.0.0 or greater is a peer dependency;
