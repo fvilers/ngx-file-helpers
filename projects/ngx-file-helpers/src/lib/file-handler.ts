@@ -25,7 +25,7 @@ export abstract class FileHandler {
     files: FileList,
     onFileRead: (fileRead: ReadFile) => void
   ): Promise<void> {
-    const filteredFiles = Array.from<File>(files).filter(this.filter);
+    const filteredFiles = Array.from<File>(files).filter((file, index, array) => this.filter(file, index, array));
     const fileCount = filteredFiles.length;
 
     this.readStart.emit(fileCount);
