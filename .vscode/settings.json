@@ -4,5 +4,5 @@
     "node_modules": true,
     "package-lock.json": true
   },
-  "cSpell.words": ["dropzone"]
+  "cSpell.words": ["devkit", "dropzone", "packagr"]
 }

@@ -9,11 +9,8 @@ export abstract class FileHandler {
   public readMode: ReadMode = ReadMode.dataURL;
 
   @Input()
-  public filter: (
-    file: File,
-    index: number,
-    files: Array<File>
-  ) => boolean = () => true;
+  public filter: (file: File, index: number, files: Array<File>) => boolean =
+    () => true;
 
   @Output()
   public readStart = new EventEmitter<number>();
@@ -25,7 +22,9 @@ export abstract class FileHandler {
     files: FileList,
     onFileRead: (fileRead: ReadFile) => void
   ): Promise<void> {
-    const filteredFiles = Array.from<File>(files).filter((file, index, array) => this.filter(file, index, array));
+    const filteredFiles = Array.from<File>(files).filter((file, index, array) =>
+      this.filter(file, index, array)
+    );
     const fileCount = filteredFiles.length;
 
     this.readStart.emit(fileCount);
