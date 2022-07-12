@@ -6,4 +6,5 @@ export enum ReadMode {
   binaryString,
   dataURL,
   text,
+  skip,
 }

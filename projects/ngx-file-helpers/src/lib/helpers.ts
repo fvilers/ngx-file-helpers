@@ -34,6 +34,11 @@ export async function readFileAsync(
       case ReadMode.text:
         reader.readAsText(file);
         break;
+      case ReadMode.skip:
+        // Immediately return without reading the file
+        // See: https://github.com/fvilers/ngx-file-helpers/issues/57
+        resolve(new ReadFileImpl(file, readMode));
+        break;
       case ReadMode.dataURL:
       default:
         reader.readAsDataURL(file);
