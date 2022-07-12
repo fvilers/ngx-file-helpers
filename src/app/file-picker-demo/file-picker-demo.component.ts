@@ -12,7 +12,7 @@ export class FilePickerDemoComponent {
   public status: string | null = null;
 
   @ViewChild('filePicker', { static: false })
-  private filePicker: FilePickerDirective | null = null;
+  private filePicker?: FilePickerDirective;
 
   ignoreTooBigFile(file: File): boolean {
     return file.size < 100000;
@@ -20,6 +20,7 @@ export class FilePickerDemoComponent {
 
   onReadStart(fileCount: number) {
     this.status = `Reading ${fileCount} file(s)...`;
+    this.picked = null;
   }
 
   onFilePicked(file: ReadFile) {
@@ -28,8 +29,6 @@ export class FilePickerDemoComponent {
 
   onReadEnd(fileCount: number) {
     this.status = `Read ${fileCount} file(s) on ${new Date().toLocaleTimeString()}.`;
-    if (this.filePicker !== null) {
-      this.filePicker.reset();
-    }
+    this.filePicker?.reset();
   }
 }
