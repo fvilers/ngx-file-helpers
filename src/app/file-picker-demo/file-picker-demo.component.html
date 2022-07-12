@@ -1,6 +1,6 @@
-<span class="mat-title">Pick an image</span>
+<h2 class="mat-title">Pick an image</h2>
 <br />
-<span>{{ status }}</span>
+<p>{{ status }}</p>
 
 <figure *ngIf="picked">
   <img [src]="picked.content" />
@@ -14,8 +14,18 @@
   </figcaption>
 </figure>
 
-<button type="button" mat-button #filePicker="ngxFilePicker" ngxFilePicker [readMode]="readMode" [multiple]="true"
-  [filter]="ignoreTooBigFile" accept="image/*" (readStart)="onReadStart($event)" (filePick)="onFilePicked($event)"
-  (readEnd)="onReadEnd($event)">
+<button
+  type="button"
+  mat-button
+  #filePicker="ngxFilePicker"
+  ngxFilePicker
+  [readMode]="readMode"
+  [multiple]="true"
+  [filter]="ignoreTooBigFile"
+  accept="image/*"
+  (readStart)="onReadStart($event)"
+  (filePick)="onFilePicked($event)"
+  (readEnd)="onReadEnd($event)"
+>
   Browse
 </button>
