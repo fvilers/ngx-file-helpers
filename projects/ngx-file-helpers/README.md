@@ -16,6 +16,10 @@ https://stackblitz.com/edit/ngx-file-helpers-demo
 
 ## Breaking changes
 
+Here's a list of the breaking changes upon the 8.0 release:
+
+- Angular (core/common) version 14.0.0 or greater is a peer dependency;
+
 Here's a list of the breaking changes upon the 7.0 release:
 
 - Angular (core/common) version 13.0.0 or greater is a peer dependency;
