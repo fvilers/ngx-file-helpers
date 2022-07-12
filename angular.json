@@ -155,6 +155,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ngx-file-helpers-demo"
+  }
 }
