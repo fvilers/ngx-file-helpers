@@ -8,6 +8,7 @@ import { NgxFileHelpersModule } from 'ngx-file-helpers';
 import { AppComponent } from './app.component';
 import { FileDropzoneDemoComponent } from './file-dropzone-demo/file-dropzone-demo.component';
 import { FilePickerDemoComponent } from './file-picker-demo/file-picker-demo.component';
+import { FilePickerLargeFilesDemoComponent } from './file-picker-large-files-demo/file-picker-large-files-demo.component';
 import { ReadModePipe } from './read-mode.pipe';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ReadModePipe } from './read-mode.pipe';
     AppComponent,
     ReadModePipe,
     FilePickerDemoComponent,
+    FilePickerLargeFilesDemoComponent,
     FileDropzoneDemoComponent,
   ],
   imports: [
