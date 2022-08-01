@@ -235,7 +235,8 @@ interface ReadFile {
   size: number;
   type: string;
   readMode: ReadMode;
-  content: any;
+  content?: any;
+  underlyingFile: File; // https://developer.mozilla.org/en-US/docs/Web/API/File
 }
 ```
 
@@ -249,5 +250,8 @@ enum ReadMode {
   binaryString,
   dataURL,
   text
+  skip,
 }
 ```
+
+A new read mode has been introduced to ensure the directive skips reading the file. This is particularly important when uploading large files as the FileReader used behind the scenes cannot handle that case by default. Reading the underlying file is left to the directive consumer as the `content` property will be `undefined` for `ReadMode.skip`.

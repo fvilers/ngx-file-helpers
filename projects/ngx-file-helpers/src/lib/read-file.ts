@@ -5,6 +5,6 @@ export interface ReadFile {
   size: number;
   type: string;
   readMode: ReadMode;
-  content: any;
+  content?: any;
   underlyingFile: File;
 }

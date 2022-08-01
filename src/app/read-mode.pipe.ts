@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ReadMode } from 'ngx-file-helpers';
 
 @Pipe({
-  name: 'readMode'
+  name: 'readMode',
 })
 export class ReadModePipe implements PipeTransform {
   transform(value: any, args?: any): any {
@@ -11,11 +11,16 @@ export class ReadModePipe implements PipeTransform {
       case ReadMode.arrayBuffer:
         return 'Array Buffer';
       case ReadMode.binaryString:
-        return 'Binary String'
+        return 'Binary String';
       case ReadMode.dataURL:
         return 'Data URL';
       case ReadMode.text:
         return 'Text';
+      case ReadMode.skip:
+        return 'Skip';
+      default:
+        console.warn('Missing case for read mode', value);
+        return '';
     }
   }
 }

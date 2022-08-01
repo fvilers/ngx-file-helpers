@@ -1,0 +1,22 @@
+<h2 class="mat-title">Pick a large file</h2>
+<br />
+<p>{{ status }}</p>
+
+<pre *ngIf="picked">
+  {{ picked.name }} ({{ picked.size }} bytes) read using {{
+    readMode | readMode
+  }}
+</pre>
+
+<button
+  type="button"
+  mat-button
+  #filePicker="ngxFilePicker"
+  ngxFilePicker
+  [readMode]="readMode"
+  (readStart)="onReadStart($event)"
+  (filePick)="onFilePicked($event)"
+  (readEnd)="onReadEnd($event)"
+>
+  Browse
+</button>
