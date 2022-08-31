@@ -7,7 +7,7 @@ import { ReadFile, ReadMode } from 'ngx-file-helpers';
   styleUrls: ['./file-dropzone-demo.component.css'],
 })
 export class FileDropzoneDemoComponent {
-  public readMode = ReadMode.dataURL;
+  public readMode = ReadMode.DataURL;
   public isHover: boolean = false;
   public files: Array<ReadFile> = [];
 

@@ -7,7 +7,7 @@ import { FilePickerDirective, ReadFile, ReadMode } from 'ngx-file-helpers';
   styleUrls: ['./file-picker-demo.component.css'],
 })
 export class FilePickerDemoComponent {
-  public readMode = ReadMode.dataURL;
+  public readMode = ReadMode.DataURL;
   public picked: ReadFile | null = null;
   public status: string | null = null;
 

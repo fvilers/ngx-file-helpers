@@ -8,15 +8,15 @@ import { ReadMode } from 'ngx-file-helpers';
 export class ReadModePipe implements PipeTransform {
   transform(value: any, args?: any): any {
     switch (value) {
-      case ReadMode.arrayBuffer:
+      case ReadMode.ArrayBuffer:
         return 'Array Buffer';
-      case ReadMode.binaryString:
+      case ReadMode.BinaryString:
         return 'Binary String';
-      case ReadMode.dataURL:
+      case ReadMode.DataURL:
         return 'Data URL';
-      case ReadMode.text:
+      case ReadMode.Text:
         return 'Text';
-      case ReadMode.skip:
+      case ReadMode.Skip:
         return 'Skip';
       default:
         console.warn('Missing case for read mode', value);
