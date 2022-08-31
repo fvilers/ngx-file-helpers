@@ -6,7 +6,7 @@ import { ReadMode } from './read-mode.enum';
 @Directive()
 export abstract class FileHandler {
   @Input()
-  public readMode: ReadMode = ReadMode.dataURL;
+  public readMode: ReadMode = ReadMode.DataURL;
 
   @Input()
   public filter: (file: File, index: number, files: Array<File>) => boolean =
