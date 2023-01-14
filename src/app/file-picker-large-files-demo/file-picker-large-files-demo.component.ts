@@ -7,7 +7,7 @@ import { FilePickerDirective, ReadFile, ReadMode } from 'ngx-file-helpers';
   styleUrls: ['./file-picker-large-files-demo.component.css'],
 })
 export class FilePickerLargeFilesDemoComponent {
-  public readMode = ReadMode.skip;
+  public readMode = ReadMode.Skip;
   public picked: ReadFile | null = null;
   public status: string | null = null;
 

@@ -26,25 +26,20 @@ export async function readFileAsync(
 
     switch (readMode) {
       case ReadMode.ArrayBuffer:
-      case ReadMode.arrayBuffer:
         reader.readAsArrayBuffer(file);
         break;
       case ReadMode.BinaryString:
-      case ReadMode.binaryString:
         reader.readAsBinaryString(file);
         break;
       case ReadMode.Text:
-      case ReadMode.text:
         reader.readAsText(file);
         break;
       case ReadMode.Skip:
-      case ReadMode.skip:
         // Immediately return without reading the file
         // See: https://github.com/fvilers/ngx-file-helpers/issues/57
         resolve(new ReadFileImpl(file, readMode));
         break;
       case ReadMode.DataURL:
-      case ReadMode.dataURL:
       default:
         reader.readAsDataURL(file);
         break;
