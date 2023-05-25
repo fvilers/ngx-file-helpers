@@ -18,6 +18,9 @@ export abstract class FileHandler {
   @Output()
   public readEnd = new EventEmitter<number>();
 
+  @Output()
+  public readError = new EventEmitter<{ file: File, error: any }>();
+
   protected async readFiles(
     files: FileList,
     onFileRead: (fileRead: ReadFile) => void
@@ -26,16 +29,24 @@ export abstract class FileHandler {
       this.filter(file, index, array)
     );
     const fileCount = filteredFiles.length;
+    let readCount = 0;
 
     this.readStart.emit(fileCount);
 
     await Promise.all(
       filteredFiles.map(async (file) => {
-        const readFile = await readFileAsync(file, this.readMode);
-        onFileRead(readFile);
+        try {
+          const readFile = await readFileAsync(file, this.readMode);
+          onFileRead(readFile);
+          readCount++;
+        } catch (err) {
+          this.readError.emit({ file, error: err });
+          // do not re-throw, the promise returned by readFiles is not awaited anywhere
+          // and re-throwing would result in "unhandled rejections" that the consumer cannot handle
+        }
       })
-    );
-
-    this.readEnd.emit(fileCount);
+    ).finally(() => {
+      this.readEnd.emit(readCount);
+    });
   }
 }
