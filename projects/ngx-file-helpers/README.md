@@ -170,12 +170,15 @@ export class MyComponent {
 }
 ```
 
-There are two more events that can be listened to:
+There are three more events that can be listened to:
 
-- `readStart`: triggered when the directive start to read files;
+- `readStart`: triggered when the directive start to read files.
+- `readError`: triggered when the directive has encountered an error reading a file; this typically occurs when dropping a folder
 - `readEnd`: triggered when the directive has read all the files.
 
-These two events emit the number of file (`$event` variable) to be or that has been read.
+`readStart` emits the number of files (`$event` variable) to be read.
+`readError` emits an object containing the file and the error that occurred.
+`readEnd` emits the number of files that have been successfully read.
 
 In some cases you may want to filter files before reading them. You could use a special input argument `filter` which takes a function which should return `true` file to be read or `false` to stop reading.
 
