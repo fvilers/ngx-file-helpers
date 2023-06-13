@@ -3,7 +3,7 @@
 IF "%1"=="" GOTO :usage
 
 rem Important: no space between %1 and pipe
-echo %1|findstr /r "^[0-9]\.[0-9]\.[0-9]$" >nul 2>&1
+echo %1|findstr /r "^[0-9]*[0-9]\.[0-9]*[0-9]\.[0-9]*[0-9]$" >nul 2>&1
 IF errorlevel 1 (
   GOTO :usage
 )
