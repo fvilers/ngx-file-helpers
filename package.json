@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "npm run build:lib",
     "start": "ng serve",
     "start:lib": "ng build ngx-file-helpers --watch",
     "build": "ng build",
