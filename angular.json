@@ -92,10 +92,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngx-file-helpers-demo:build:production"
+              "buildTarget": "ngx-file-helpers-demo:build:production"
             },
             "development": {
-              "browserTarget": "ngx-file-helpers-demo:build:development"
+              "buildTarget": "ngx-file-helpers-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,7 +103,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-file-helpers-demo:build"
+            "buildTarget": "ngx-file-helpers-demo:build"
           }
         },
         "test": {
