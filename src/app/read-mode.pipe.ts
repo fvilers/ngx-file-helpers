@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ReadMode } from 'ngx-file-helpers';
 
 @Pipe({
+  standalone: true,
   name: 'readMode',
 })
 export class ReadModePipe implements PipeTransform {

@@ -1,17 +1,21 @@
 import { Component, ViewChild } from '@angular/core';
-import { FilePickerDirective, ReadFile, ReadMode } from 'ngx-file-helpers';
+import { MatButtonModule } from '@angular/material/button';
+import { FilePickerDirective, NgxFileHelpersModule, ReadFile, ReadMode } from 'ngx-file-helpers';
+import { ReadModePipe } from '../read-mode.pipe';
 
 @Component({
+  standalone: true,
   selector: 'app-file-picker-demo',
   templateUrl: './file-picker-demo.component.html',
-  styleUrls: ['./file-picker-demo.component.css'],
+  styleUrl: './file-picker-demo.component.css',
+  imports: [MatButtonModule, NgxFileHelpersModule, ReadModePipe]
 })
 export class FilePickerDemoComponent {
   public readMode = ReadMode.DataURL;
   public picked: ReadFile | null = null;
   public status: string | null = null;
 
-  @ViewChild('filePicker', { static: false })
+  @ViewChild(FilePickerDirective)
   private filePicker?: FilePickerDirective;
 
   ignoreTooBigFile(file: File): boolean {
