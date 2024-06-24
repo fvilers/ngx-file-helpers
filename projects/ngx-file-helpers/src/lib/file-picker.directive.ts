@@ -13,6 +13,7 @@ import { coerceBooleanProperty } from './helpers';
 import { ReadFile } from './read-file';
 
 @Directive({
+  standalone: true,
   selector: '[ngxFilePicker]',
   exportAs: 'ngxFilePicker',
 })

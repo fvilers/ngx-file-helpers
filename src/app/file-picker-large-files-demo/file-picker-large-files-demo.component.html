@@ -2,11 +2,13 @@
 <br />
 <p>{{ status }}</p>
 
-<pre *ngIf="picked">
-  {{ picked.name }} ({{ picked.size }} bytes) read using {{
-    readMode | readMode
-  }}
-</pre>
+@if (picked) {
+  <pre>
+    {{ picked.name }} ({{ picked.size }} bytes) read using {{
+      readMode | readMode
+    }}
+  </pre>
+}
 
 <button
   type="button"

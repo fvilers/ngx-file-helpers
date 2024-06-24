@@ -3,8 +3,7 @@ import { FileDropzoneDirective } from './file-dropzone.directive';
 import { FilePickerDirective } from './file-picker.directive';
 
 @NgModule({
-  declarations: [FileDropzoneDirective, FilePickerDirective],
-  imports: [],
+  imports: [FileDropzoneDirective, FilePickerDirective],
   exports: [FileDropzoneDirective, FilePickerDirective],
 })
-export class NgxFileHelpersModule {}
+export class NgxFileHelpersModule { }

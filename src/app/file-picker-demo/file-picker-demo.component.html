@@ -2,17 +2,19 @@
 <br />
 <p>{{ status }}</p>
 
-<figure *ngIf="picked">
-  <img [src]="picked.content" />
+@if (picked) {
+  <figure>
+    <img [src]="picked.content" />
 
-  <figcaption>
-    File:
-    <strong>{{ picked.name }}</strong>
-    <br />
-    {{ picked.size }} bytes <br />
-    Read as {{ picked.readMode | readMode }}
-  </figcaption>
-</figure>
+    <figcaption>
+      File:
+      <strong>{{ picked.name }}</strong>
+      <br />
+      {{ picked.size }} bytes <br />
+      Read as {{ picked.readMode | readMode }}
+    </figcaption>
+  </figure>
+}
 
 <button
   type="button"
