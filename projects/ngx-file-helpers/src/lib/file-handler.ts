@@ -1,32 +1,29 @@
-import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, input, output } from '@angular/core';
 import { readFileAsync } from './helpers';
 import { ReadFile } from './read-file';
 import { ReadMode } from './read-mode.enum';
 
 @Directive()
 export abstract class FileHandler {
-  @Input()
-  public readMode: ReadMode = ReadMode.DataURL;
+  public readonly readMode = input<ReadMode>(ReadMode.DataURL);
 
-  @Input()
-  public filter: (file: File, index: number, files: Array<File>) => boolean =
-    () => true;
+  public readonly filter = input<(file: File, index: number, files: Array<File>) => boolean>(() => true);
 
-  @Output()
-  public readStart = new EventEmitter<number>();
+  public readonly readStart = output<number>();
 
-  @Output()
-  public readEnd = new EventEmitter<number>();
+  public readonly readEnd = output<number>();
 
-  @Output()
-  public readError = new EventEmitter<{ file: File, error: any }>();
+  public readonly readError = output<{
+    file: File;
+    error: any;
+  }>();
 
   protected async readFiles(
     files: FileList,
     onFileRead: (fileRead: ReadFile) => void
   ): Promise<void> {
     const filteredFiles = Array.from<File>(files).filter((file, index, array) =>
-      this.filter(file, index, array)
+      this.filter()(file, index, array)
     );
     const fileCount = filteredFiles.length;
     let readCount = 0;
@@ -36,7 +33,7 @@ export abstract class FileHandler {
     await Promise.all(
       filteredFiles.map(async (file) => {
         try {
-          const readFile = await readFileAsync(file, this.readMode);
+          const readFile = await readFileAsync(file, this.readMode());
           onFileRead(readFile);
           readCount++;
         } catch (err) {

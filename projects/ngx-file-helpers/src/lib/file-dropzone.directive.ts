@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
+import { Directive, HostListener, output } from '@angular/core';
 import { FileHandler } from './file-handler';
 import { ReadFile } from './read-file';
 
@@ -8,8 +8,7 @@ import { ReadFile } from './read-file';
   exportAs: 'ngxFileDropzone',
 })
 export class FileDropzoneDirective extends FileHandler {
-  @Output()
-  public fileDrop = new EventEmitter<ReadFile>();
+  public readonly fileDrop = output<ReadFile>();
 
   @HostListener('dragenter', ['$event'])
   public onDragEnter(event: DragEvent) {

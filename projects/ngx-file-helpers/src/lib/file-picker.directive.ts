@@ -1,16 +1,15 @@
 import {
   Directive,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Input,
   OnInit,
-  Output,
   Renderer2,
+  booleanAttribute,
   inject,
+  input,
+  output
 } from '@angular/core';
 import { FileHandler } from './file-handler';
-import { coerceBooleanProperty } from './helpers';
 import { ReadFile } from './read-file';
 
 @Directive({
@@ -22,32 +21,25 @@ export class FilePickerDirective extends FileHandler implements OnInit {
   readonly #el = inject(ElementRef);
   readonly #renderer = inject(Renderer2);
 
-  @Input()
-  public accept = '';
+  public readonly accept = input('');
 
-  @Input()
-  public get multiple(): boolean {
-    return this._multiple;
-  }
-  public set multiple(value: boolean) {
-    this._multiple = coerceBooleanProperty(value);
-  }
-  private _multiple: boolean = false;
+  public readonly multiple = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
-  @Output()
-  public filePick = new EventEmitter<ReadFile>();
+  public readonly filePick = output<ReadFile>();
 
-  private _input: any;
+  private _input?: HTMLInputElement;
 
   public ngOnInit() {
     this._input = this.#renderer.createElement('input');
     this.#renderer.appendChild(this.#el.nativeElement, this._input);
 
     this.#renderer.setAttribute(this._input, 'type', 'file');
-    this.#renderer.setAttribute(this._input, 'accept', this.accept);
+    this.#renderer.setAttribute(this._input, 'accept', this.accept());
     this.#renderer.setStyle(this._input, 'display', 'none');
 
-    if (this.multiple) {
+    if (this.multiple()) {
       this.#renderer.setAttribute(this._input, 'multiple', 'multiple');
     }
 
@@ -64,7 +56,7 @@ export class FilePickerDirective extends FileHandler implements OnInit {
       return;
     }
 
-    this._input.value = null;
+    this._input.value = '';
   }
 
   @HostListener('click')

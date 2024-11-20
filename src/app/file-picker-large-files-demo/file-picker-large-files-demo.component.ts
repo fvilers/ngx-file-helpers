@@ -1,6 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { FilePickerDirective, NgxFileHelpersModule, ReadFile, ReadMode } from 'ngx-file-helpers';
+import {
+  FilePickerDirective,
+  NgxFileHelpersModule,
+  ReadFile,
+  ReadMode,
+} from 'ngx-file-helpers';
 import { ReadModePipe } from '../read-mode.pipe';
 
 @Component({
@@ -14,20 +19,19 @@ export class FilePickerLargeFilesDemoComponent {
   public picked: ReadFile | null = null;
   public status: string | null = null;
 
-  @ViewChild('filePicker', { static: false })
-  private filePicker?: FilePickerDirective;
+  protected readonly filePicker = viewChild(FilePickerDirective);
 
-  onReadStart(fileCount: number) {
+  protected onReadStart(fileCount: number): void {
     this.status = `Reading ${fileCount} file(s)...`;
     this.picked = null;
   }
 
-  onFilePicked(file: ReadFile) {
+  protected onFilePicked(file: ReadFile): void {
     this.picked = file;
   }
 
-  onReadEnd(fileCount: number) {
+  protected onReadEnd(fileCount: number): void {
     this.status = `Read ${fileCount} file(s) on ${new Date().toLocaleTimeString()}.`;
-    this.filePicker?.reset();
+    this.filePicker()?.reset();
   }
 }
