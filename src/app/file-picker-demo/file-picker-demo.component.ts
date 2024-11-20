@@ -4,7 +4,6 @@ import { FilePickerDirective, NgxFileHelpersModule, ReadFile, ReadMode } from 'n
 import { ReadModePipe } from '../read-mode.pipe';
 
 @Component({
-  standalone: true,
   selector: 'app-file-picker-demo',
   templateUrl: './file-picker-demo.component.html',
   styleUrl: './file-picker-demo.component.css',
