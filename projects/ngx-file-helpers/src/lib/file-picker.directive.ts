@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   Renderer2,
+  inject,
 } from '@angular/core';
 import { FileHandler } from './file-handler';
 import { coerceBooleanProperty } from './helpers';
@@ -18,6 +19,9 @@ import { ReadFile } from './read-file';
   exportAs: 'ngxFilePicker',
 })
 export class FilePickerDirective extends FileHandler implements OnInit {
+  readonly #el = inject(ElementRef);
+  readonly #renderer = inject(Renderer2);
+
   @Input()
   public accept = '';
 
@@ -35,23 +39,19 @@ export class FilePickerDirective extends FileHandler implements OnInit {
 
   private _input: any;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
-    super();
-  }
-
   public ngOnInit() {
-    this._input = this.renderer.createElement('input');
-    this.renderer.appendChild(this.el.nativeElement, this._input);
+    this._input = this.#renderer.createElement('input');
+    this.#renderer.appendChild(this.#el.nativeElement, this._input);
 
-    this.renderer.setAttribute(this._input, 'type', 'file');
-    this.renderer.setAttribute(this._input, 'accept', this.accept);
-    this.renderer.setStyle(this._input, 'display', 'none');
+    this.#renderer.setAttribute(this._input, 'type', 'file');
+    this.#renderer.setAttribute(this._input, 'accept', this.accept);
+    this.#renderer.setStyle(this._input, 'display', 'none');
 
     if (this.multiple) {
-      this.renderer.setAttribute(this._input, 'multiple', 'multiple');
+      this.#renderer.setAttribute(this._input, 'multiple', 'multiple');
     }
 
-    this.renderer.listen(this._input, 'change', (event: Event) =>
+    this.#renderer.listen(this._input, 'change', (event: Event) =>
       this._onListen(event)
     );
   }

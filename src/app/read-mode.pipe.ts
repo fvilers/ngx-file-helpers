@@ -6,7 +6,7 @@ import { ReadMode } from 'ngx-file-helpers';
   name: 'readMode',
 })
 export class ReadModePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  public transform(value: ReadMode): string {
     switch (value) {
       case ReadMode.ArrayBuffer:
         return 'Array Buffer';
