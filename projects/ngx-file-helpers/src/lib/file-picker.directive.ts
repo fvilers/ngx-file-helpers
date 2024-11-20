@@ -13,7 +13,6 @@ import { FileHandler } from './file-handler';
 import { ReadFile } from './read-file';
 
 @Directive({
-  standalone: true,
   selector: '[ngxFilePicker]',
   exportAs: 'ngxFilePicker',
 })
