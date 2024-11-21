@@ -1,12 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ReadMode } from 'ngx-file-helpers';
 
-@Pipe({
-  standalone: true,
-  name: 'readMode',
-})
+@Pipe({ name: 'readMode' })
 export class ReadModePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  public transform(value: ReadMode): string {
     switch (value) {
       case ReadMode.ArrayBuffer:
         return 'Array Buffer';

@@ -8,7 +8,6 @@ import { FilePickerDemoComponent } from './file-picker-demo/file-picker-demo.com
 import { FilePickerLargeFilesDemoComponent } from './file-picker-large-files-demo/file-picker-large-files-demo.component';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

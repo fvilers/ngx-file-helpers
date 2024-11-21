@@ -1,57 +1,48 @@
 import {
   Directive,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Input,
   OnInit,
-  Output,
   Renderer2,
+  booleanAttribute,
+  inject,
+  input,
+  output
 } from '@angular/core';
 import { FileHandler } from './file-handler';
-import { coerceBooleanProperty } from './helpers';
 import { ReadFile } from './read-file';
 
 @Directive({
-  standalone: true,
   selector: '[ngxFilePicker]',
   exportAs: 'ngxFilePicker',
 })
 export class FilePickerDirective extends FileHandler implements OnInit {
-  @Input()
-  public accept = '';
+  readonly #el = inject(ElementRef);
+  readonly #renderer = inject(Renderer2);
 
-  @Input()
-  public get multiple(): boolean {
-    return this._multiple;
-  }
-  public set multiple(value: boolean) {
-    this._multiple = coerceBooleanProperty(value);
-  }
-  private _multiple: boolean = false;
+  public readonly accept = input('');
 
-  @Output()
-  public filePick = new EventEmitter<ReadFile>();
+  public readonly multiple = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
-  private _input: any;
+  public readonly filePick = output<ReadFile>();
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
-    super();
-  }
+  private _input?: HTMLInputElement;
 
   public ngOnInit() {
-    this._input = this.renderer.createElement('input');
-    this.renderer.appendChild(this.el.nativeElement, this._input);
+    this._input = this.#renderer.createElement('input');
+    this.#renderer.appendChild(this.#el.nativeElement, this._input);
 
-    this.renderer.setAttribute(this._input, 'type', 'file');
-    this.renderer.setAttribute(this._input, 'accept', this.accept);
-    this.renderer.setStyle(this._input, 'display', 'none');
+    this.#renderer.setAttribute(this._input, 'type', 'file');
+    this.#renderer.setAttribute(this._input, 'accept', this.accept());
+    this.#renderer.setStyle(this._input, 'display', 'none');
 
-    if (this.multiple) {
-      this.renderer.setAttribute(this._input, 'multiple', 'multiple');
+    if (this.multiple()) {
+      this.#renderer.setAttribute(this._input, 'multiple', 'multiple');
     }
 
-    this.renderer.listen(this._input, 'change', (event: Event) =>
+    this.#renderer.listen(this._input, 'change', (event: Event) =>
       this._onListen(event)
     );
   }
@@ -64,7 +55,7 @@ export class FilePickerDirective extends FileHandler implements OnInit {
       return;
     }
 
-    this._input.value = null;
+    this._input.value = '';
   }
 
   @HostListener('click')
