@@ -10,8 +10,7 @@
     "build:lib": "ng build ngx-file-helpers --configuration production",
     "prepublish:lib": "npm run build:lib",
     "publish:lib": "npm publish dist/ngx-file-helpers",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {
