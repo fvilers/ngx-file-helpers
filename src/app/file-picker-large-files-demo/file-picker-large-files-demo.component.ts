@@ -1,4 +1,4 @@
-import { Component, viewChild } from '@angular/core';
+import { Component, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   FilePickerDirective,
@@ -12,6 +12,7 @@ import { ReadModePipe } from '../read-mode.pipe';
   selector: 'app-file-picker-large-files-demo',
   templateUrl: './file-picker-large-files-demo.component.html',
   styleUrl: './file-picker-large-files-demo.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatButtonModule, NgxFileHelpersModule, ReadModePipe]
 })
 export class FilePickerLargeFilesDemoComponent {

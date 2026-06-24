@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgxFileHelpersModule, ReadFile, ReadMode } from 'ngx-file-helpers';
 import { ReadModePipe } from '../read-mode.pipe';
 
@@ -6,6 +6,7 @@ import { ReadModePipe } from '../read-mode.pipe';
   selector: 'app-file-dropzone-demo',
   templateUrl: './file-dropzone-demo.component.html',
   styleUrl: './file-dropzone-demo.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgxFileHelpersModule, ReadModePipe]
 })
 export class FileDropzoneDemoComponent {
